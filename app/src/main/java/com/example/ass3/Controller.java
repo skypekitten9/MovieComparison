@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.ass3.fragments.Fragment_Favourites;
+import com.example.ass3.fragments.Fragment_Home;
+import com.example.ass3.fragments.Fragment_Imdb;
+import com.example.ass3.fragments.Fragment_Rotten;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Controller {
@@ -27,6 +31,8 @@ public class Controller {
         homeFragment = new Fragment_Home();
         favouritesFragment = new Fragment_Favourites();
         imdbFragment = new Fragment_Imdb();
+        imdbFragment.SetCont(this);
+        imdbFragment.SetMain(mainActivity);
         rottenFragment = new Fragment_Rotten();
         //BottomNavigation
         bottomNavigationView = bottomNav;

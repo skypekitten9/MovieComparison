@@ -1,4 +1,4 @@
-package com.example.moviecomparison;
+package com.example.ass3;
 
 import org.junit.Test;
 

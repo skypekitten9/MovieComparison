@@ -1,4 +1,4 @@
-package com.example.moviecomparison;
+package com.example.ass3;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.moviecomparison", appContext.getPackageName());
+        assertEquals("com.example.ass3", appContext.getPackageName());
     }
 }

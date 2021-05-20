@@ -29,12 +29,12 @@
         android:text="TextView" />
 
     <Button
-        android:id="@+id/rwButtonAdd"
+        android:id="@+id/rwButtonRemove"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="ADD"
-        android:background="@drawable/custom_button" />
+        android:background="@drawable/custom_button"
+        android:text="Remove" />
 
 
 </LinearLayout>

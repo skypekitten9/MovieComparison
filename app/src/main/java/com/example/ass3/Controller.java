@@ -1,17 +1,24 @@
 package com.example.ass3;
 
+import android.content.Intent;
 import android.view.MenuItem;
+import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 
+import com.example.ass3.database.Movie;
+import com.example.ass3.database.MovieRepository;
 import com.example.ass3.fragments.Fragment_Favourites;
 import com.example.ass3.fragments.Fragment_Home;
 import com.example.ass3.fragments.Fragment_Imdb;
 import com.example.ass3.fragments.Fragment_Rotten;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 public class Controller {
     MainActivity main;
@@ -24,16 +31,23 @@ public class Controller {
 
     FragmentManager fragmentManager;
 
+    MovieRepository movieRepository;
+
+    Movie tempMovie;
+
+
     public Controller(MainActivity mainActivity, BottomNavigationView bottomNav){
         this.main = mainActivity;
 
         //Fragments
         homeFragment = new Fragment_Home();
         favouritesFragment = new Fragment_Favourites();
+        favouritesFragment.setController(this);
         imdbFragment = new Fragment_Imdb();
         imdbFragment.SetCont(this);
         imdbFragment.SetMain(mainActivity);
         rottenFragment = new Fragment_Rotten();
+        rottenFragment.setController(this);
         //BottomNavigation
         bottomNavigationView = bottomNav;
         bottomNavigationView.setOnNavigationItemSelectedListener(navListner);
@@ -41,6 +55,9 @@ public class Controller {
         fragmentManager = main.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         main.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+
+        //Database
+        movieRepository = new MovieRepository(mainActivity.getApplication());
     }
 
     //Bottom navigation change fragment method
@@ -67,5 +84,40 @@ public class Controller {
             return true;
         }
     };
+
+    public void InsertMovie(String title, int year, float rating, String imdbid){
+        Movie movie = new Movie(title,year,rating,imdbid);
+        movieRepository.InsertMovie(movie);
+    }
+
+    public LiveData<List<Movie>> GetMovies()
+    {
+        return movieRepository.GetAllMovies();
+    }
+
+    public void RemoveMovie(int id)
+    {
+        movieRepository.RemoveMovie(id);
+    }
+
+    public void OpenPopup()
+    {
+        rottenFragment.startActivityForResult(new Intent(main, PopUpWindow.class ),50);
+    }
+
+    public void MovieToAdd(String title, int year, String imdbId )
+    {
+        tempMovie= new Movie();
+        tempMovie.setTitle( title);
+        tempMovie.setYear(year);
+        tempMovie.setImdbId(imdbId);
+
+    }
+
+    public Movie getTempMovie() {
+        return tempMovie;
+    }
+
+
 
 }

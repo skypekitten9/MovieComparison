@@ -27,7 +27,6 @@ public class Fragment_Imdb extends Fragment {
     private String[] score;
     RecyclerView recyclerView;
     Button btnSearch;
-    Dialog imdbDialog;
     MainActivity mainActivity;
     Controller controller;
 
@@ -47,7 +46,7 @@ public class Fragment_Imdb extends Fragment {
     private void InitializeImdb(View view) {
         recyclerView = view.findViewById(R.id.rwImdb);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RecyclerView.Adapter adapter = new Rw_Adapter(); //LÄGG TILL VAD SOM SKALL IN
+        Rw_Adapter adapter = new Rw_Adapter(R.layout.rw_row); //LÄGG TILL VAD SOM SKALL IN
         recyclerView.setAdapter(adapter);
         //Search button functions
         btnSearch = view.findViewById(R.id.btnSearch);

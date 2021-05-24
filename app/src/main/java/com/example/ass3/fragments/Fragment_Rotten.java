@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
@@ -82,21 +83,23 @@ public class Fragment_Rotten extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         float value = -1f;
-        switch (requestCode)
+        Log.d(TAG, "Resultcode = " + Integer.toString(requestCode));
+        switch (resultCode)
         {
-            case (50):
-                if (resultCode == Activity.RESULT_OK)
-                    value= data.getFloatExtra("rating", -1);
-                    Log.d(TAG, "onActivityResult: returned " + Float.toString(value) );
+            case (Activity.RESULT_OK):
+//                Log.d(TAG, "Resultcode = " + Integer.toString(resultCode));
 
-                    Movie temp = controller.getTempMovie();
+                value= data.getFloatExtra("rating", -1);
+//                Log.d(TAG, "onActivityResult: returned " + Float.toString(value) );
 
-                    String title = temp.getTitle() +"kopia";
-                    int year = temp.getYear();
-                    float rating =value;
-                    String imdbid = temp.getImdbId();
-                    controller.InsertMovie(title,year,rating,imdbid);
-                    break;
+                Movie temp = controller.getTempMovie();
+
+                String title = temp.getTitle();
+                int year = temp.getYear();
+                float rating =value;
+                String imdbid = temp.getImdbId();
+                controller.InsertMovie(title,year,rating,imdbid);
+                break;
 
         }
     }

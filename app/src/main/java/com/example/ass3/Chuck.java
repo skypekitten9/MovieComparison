@@ -43,6 +43,7 @@ public class Chuck extends Service {
             try {
                 HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
                 int respCode = con.getResponseCode();
+
                 if(respCode == HttpURLConnection.HTTP_OK)
                 {
                    getJoke();

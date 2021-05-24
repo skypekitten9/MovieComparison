@@ -38,15 +38,20 @@ public class PopUpWindow extends Activity {
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                Intent resultIntent = new Intent();
+                setResult(Activity.RESULT_CANCELED,resultIntent);
                 finish();
             }
+
+
         });
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myRating = ratingBar.getRating();
-                Log.d(TAG, "onClick: " + Float.toString(myRating));
+//                Log.d(TAG, "onClick: " + Float.toString(myRating));
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("rating",myRating);
                 setResult(Activity.RESULT_OK,resultIntent);

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 
+import com.example.ass3.Chuck;
 import com.example.ass3.Controller;
 import com.example.ass3.PopUpWindow;
 import com.example.ass3.R;
@@ -58,6 +59,10 @@ public class Fragment_Rotten extends Fragment {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(mainActivity, PopUpWindow.class ));
+
+                controller.InsertMovie("Test",2002,1.5f,"aibsdbasdh");
+                Chuck c = new Chuck();
+                c.StartConnect();
 
             }
         });

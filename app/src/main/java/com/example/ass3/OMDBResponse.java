@@ -29,6 +29,106 @@ public class OMDBResponse {
     private String Website;
     private String Response;
 
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setYear(String year) {
+        Year = year;
+    }
+
+    public void setRated(String rated) {
+        Rated = rated;
+    }
+
+    public void setReleased(String released) {
+        Released = released;
+    }
+
+    public void setRuntime(String runtime) {
+        Runtime = runtime;
+    }
+
+    public void setGenre(String genre) {
+        Genre = genre;
+    }
+
+    public void setDirector(String director) {
+        Director = director;
+    }
+
+    public void setWriter(String writer) {
+        Writer = writer;
+    }
+
+    public void setActors(String actors) {
+        Actors = actors;
+    }
+
+    public void setPlot(String plot) {
+        Plot = plot;
+    }
+
+    public void setLanguage(String language) {
+        Language = language;
+    }
+
+    public void setCountry(String country) {
+        Country = country;
+    }
+
+    public void setAwards(String awards) {
+        Awards = awards;
+    }
+
+    public void setPoster(String poster) {
+        Poster = poster;
+    }
+
+    public void setRatings(ArrayList<Object> ratings) {
+        Ratings = ratings;
+    }
+
+    public void setMetascore(String metascore) {
+        Metascore = metascore;
+    }
+
+    public void setImdbRating(String imdbRating) {
+        this.imdbRating = imdbRating;
+    }
+
+    public void setImdbVotes(String imdbVotes) {
+        this.imdbVotes = imdbVotes;
+    }
+
+    public void setImdbID(String imdbID) {
+        this.imdbID = imdbID;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public void setDVD(String DVD) {
+        this.DVD = DVD;
+    }
+
+    public void setBoxOffice(String boxOffice) {
+        BoxOffice = boxOffice;
+    }
+
+    public void setProduction(String production) {
+        Production = production;
+    }
+
+    public void setWebsite(String website) {
+        Website = website;
+    }
+
+    public void setResponse(String response) {
+        Response = response;
+    }
+
     public String getTitle() {
         return Title;
     }

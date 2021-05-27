@@ -1,8 +1,10 @@
 package com.example.ass3;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Looper;
 import android.view.MenuItem;
-import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -118,6 +120,27 @@ public class Controller {
         return tempMovie;
     }
 
+    public void ShowToast(TemplateResponse resp)
+    {
+        main.runOnUiThread(new Toasters(main,resp));
+    }
 
 
+
+}
+
+class Toasters implements Runnable
+{
+    MainActivity main;
+    TemplateResponse resp;
+
+    public Toasters(MainActivity main, TemplateResponse resp) {
+        this.main = main;
+        this.resp = resp;
+    }
+
+    @Override
+    public void run() {
+        Toast.makeText(main,resp.getValue().getJoke(),Toast.LENGTH_LONG).show();
+    }
 }

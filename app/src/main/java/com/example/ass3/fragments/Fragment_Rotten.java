@@ -62,7 +62,7 @@ public class Fragment_Rotten extends Fragment {
                 //startActivity(new Intent(mainActivity, PopUpWindow.class ));
 
                 controller.InsertMovie("Test",2002,1.5f,"aibsdbasdh");
-                Chuck c = new Chuck();
+                Chuck c = new Chuck(controller);
                 c.StartConnect();
 
             }

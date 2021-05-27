@@ -22,6 +22,12 @@ public class Chuck extends Service {
     private Thread thread;
     public static final String  url = "https://api.icndb.com/jokes/random";
     String stream;
+    Controller controller;
+
+    public Chuck(Controller controller) {
+        this.controller = controller;
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -46,7 +52,7 @@ public class Chuck extends Service {
 
                 if(respCode == HttpURLConnection.HTTP_OK)
                 {
-                   getJoke();
+                   controller.ShowToast(getJoke());
                 }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();

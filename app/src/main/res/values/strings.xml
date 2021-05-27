@@ -13,4 +13,6 @@
     //ImdbFragment
     <string name="headerImdb">IMDB</string>
     <string name="btnRefresh2">Refresh</string>
+    //OMDB
+    <string name="apiKey">1a8005f4</string>
 </resources>

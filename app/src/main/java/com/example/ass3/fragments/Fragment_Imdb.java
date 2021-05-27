@@ -17,6 +17,7 @@ import android.widget.Button;
 
 import com.example.ass3.Controller;
 import com.example.ass3.MainActivity;
+import com.example.ass3.OMDBAPI;
 import com.example.ass3.PopUpWindow;
 import com.example.ass3.R;
 import com.example.ass3.Rw_Adapter;
@@ -29,6 +30,7 @@ public class Fragment_Imdb extends Fragment {
     Button btnSearch;
     MainActivity mainActivity;
     Controller controller;
+    OMDBAPI omdbapi;
 
 
     @Override
@@ -37,6 +39,7 @@ public class Fragment_Imdb extends Fragment {
         View view = inflater.inflate(R.layout.fragment__imdb, container, false);
         // Inflate the layout for this fragment
         InitializeImdb(view);
+        omdbapi= new OMDBAPI(mainActivity);
 
         return view;
     }
@@ -53,7 +56,8 @@ public class Fragment_Imdb extends Fragment {
         btnSearch.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(mainActivity, PopUpWindow.class ));
+                //startActivity(new Intent(mainActivity, PopUpWindow.class ));
+                omdbapi.SearchShows();
             }
         });
 

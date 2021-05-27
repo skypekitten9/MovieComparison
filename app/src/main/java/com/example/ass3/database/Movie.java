@@ -20,11 +20,11 @@ public class Movie {
 
     @NotNull
     @ColumnInfo(name = "year")
-    private int year;
+    private String year;
 
     @NotNull
     @ColumnInfo(name = "rating")
-    private float rating;
+    private String rating;
 
     @NotNull
     @ColumnInfo(name = "imdbId")
@@ -46,19 +46,19 @@ public class Movie {
         this.title = title;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public float getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -70,7 +70,7 @@ public class Movie {
         this.imdbId = imdbId;
     }
 
-    public Movie(@NotNull String title, @NotNull int year, @NotNull float rating, @NotNull String imdbId) {
+    public Movie(@NotNull String title, @NotNull String year, @NotNull String rating, @NotNull String imdbId) {
         this.title = title;
         this.year = year;
         this.rating = rating;

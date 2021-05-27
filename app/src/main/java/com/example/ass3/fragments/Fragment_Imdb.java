@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ import com.example.ass3.PopUpWindow;
 import com.example.ass3.R;
 import com.example.ass3.Rw_Adapter;
 import com.example.ass3.Rw_AdapterOMDB;
+import com.example.ass3.database.Movie;
 
 import java.util.List;
 
@@ -90,6 +92,30 @@ public class Fragment_Imdb extends Fragment {
                 }
             }
         });
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String value = "-1";
+        Log.d("TAG", "Resultcode = " + requestCode);
+        switch (resultCode)
+        {
+            case (Activity.RESULT_OK):
+//                Log.d(TAG, "Resultcode = " + Integer.toString(resultCode));
+
+                value = data.getStringExtra("rating");
+//                Log.d(TAG, "onActivityResult: returned " + Float.toString(value) );
+
+                Movie temp = controller.getTempMovie();
+
+                String title = temp.getTitle();
+                String year = temp.getYear();
+                String rating = value;
+                String imdbid = temp.getImdbId();
+                controller.InsertMovie(title,year,rating,imdbid);
+                break;
+
+        }
     }
 }
 

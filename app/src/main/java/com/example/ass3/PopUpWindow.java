@@ -15,7 +15,7 @@ public class PopUpWindow extends Activity {
     private static final String TAG = "PopUpWindow";
     RatingBar ratingBar;
     Button btnCancel, btnOK;
-    float myRating;
+    String myRating;
 
 
 
@@ -50,7 +50,7 @@ public class PopUpWindow extends Activity {
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myRating = ratingBar.getRating();
+                myRating = String.valueOf(ratingBar.getRating());
 //                Log.d(TAG, "onClick: " + Float.toString(myRating));
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("rating",myRating);

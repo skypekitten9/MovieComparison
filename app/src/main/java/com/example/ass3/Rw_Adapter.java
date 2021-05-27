@@ -53,8 +53,8 @@ public class Rw_Adapter extends RecyclerView.Adapter<Rw_Adapter.CustomViewHolder
     public void onBindViewHolder(@NonNull Rw_Adapter.CustomViewHolder holder, int position) {
 
         holder.twTitle.setText(movies.get(position).getTitle());
-        holder.twYear.setText(Integer.toString(movies.get(position).getYear()));
-        holder.twRating.setText(Float.toString(movies.get(position).getRating()));
+        holder.twYear.setText(movies.get(position).getYear());
+        holder.twRating.setText(movies.get(position).getRating());
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class Rw_Adapter extends RecyclerView.Adapter<Rw_Adapter.CustomViewHolder
 
 
                 String title = movies.get(position).getTitle() +"kopia";
-                int year = 2000;
+                String year = "2000";
                 String imdbid = "123uh12bn4i1bn4";
                 controller.MovieToAdd(title,year,imdbid);
 

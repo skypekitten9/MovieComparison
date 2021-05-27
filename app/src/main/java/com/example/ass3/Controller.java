@@ -2,7 +2,9 @@ package com.example.ass3;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.os.Looper;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -36,6 +38,8 @@ public class Controller {
     MovieRepository movieRepository;
 
     Movie tempMovie;
+
+
 
 
     public Controller(MainActivity mainActivity, BottomNavigationView bottomNav){
@@ -87,7 +91,7 @@ public class Controller {
         }
     };
 
-    public void InsertMovie(String title, int year, float rating, String imdbid){
+    public void InsertMovie(String title, String year, String rating, String imdbid){
         Movie movie = new Movie(title,year,rating,imdbid);
         movieRepository.InsertMovie(movie);
     }
@@ -106,10 +110,10 @@ public class Controller {
 
     public void OpenPopup()
     {
-        rottenFragment.startActivityForResult(new Intent(main, PopUpWindow.class ),50);
+        imdbFragment.startActivityForResult(new Intent(main, PopUpWindow.class ),50);
     }
 
-    public void MovieToAdd(String title, int year, String imdbId )
+    public void MovieToAdd(String title, String year, String imdbId )
     {
         tempMovie= new Movie();
         tempMovie.setTitle( title);
@@ -125,6 +129,7 @@ public class Controller {
     public void ShowToast(TemplateResponse resp)
     {
         main.runOnUiThread(new Toasters(main,resp));
+
     }
 
 
@@ -143,6 +148,7 @@ class Toasters implements Runnable
 
     @Override
     public void run() {
+
         Toast.makeText(main,resp.getValue().getJoke(),Toast.LENGTH_LONG).show();
     }
 }

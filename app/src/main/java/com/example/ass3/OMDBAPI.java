@@ -31,15 +31,21 @@ public class OMDBAPI extends Service {
     public static final String baseurl = "http://www.omdbapi.com/";
     private static final String TAG = "OMDBAPI";
     public LiveData<List<OMDBResponse>> result = new MutableLiveData<>();
+    public List<OMDBResponse> result2 = new ArrayList<OMDBResponse>();
+    private boolean done = false;
 
     public LiveData<List<OMDBResponse>> getResult() {
         return result;
     }
+    public List<OMDBResponse> getResult2(){
+        return result2;
+    }
+    public boolean getDone() {
+        return done;
+    }
 
     public OMDBAPI(MainActivity main) {
         apiKey = main.getResources().getString(R.string.apiKey);
-
-
     }
 
     @Nullable
@@ -52,8 +58,6 @@ public class OMDBAPI extends Service {
     {
         thread = new Thread(new SearchShows(searchTerm));
         thread.start();
-
-
     }
 
     private class SearchShows implements Runnable
@@ -68,9 +72,8 @@ public class OMDBAPI extends Service {
 
         @Override
         public void run() {
-            HttpURLConnection conn = null;
             try {
-                result = searchShowsStub(title, apiKey);
+                result = searchShows(title, apiKey);
                 Log.d(TAG, "Shows");
 
             } catch (IOException e) {
@@ -98,6 +101,7 @@ public class OMDBAPI extends Service {
                 t.setImdbRating("8.5");
                 t.setYear("2006");
                 result.add(t);
+                result2.add(t);
             }
             MutableLiveData<List<OMDBResponse>> data = new MutableLiveData<List<OMDBResponse>>();
             data.postValue(result);
@@ -131,12 +135,14 @@ public class OMDBAPI extends Service {
                 String stream = shows[i].toString();
                 OMDBResponse t = new Gson().fromJson(stream,OMDBResponse.class);
                 result.add(t);
+                result2.add(t);
             }
+
+            done = true;
 
             MutableLiveData<List<OMDBResponse>> data = new MutableLiveData<List<OMDBResponse>>();
             data.postValue(result);
             return data;
-
         }
     }
 }

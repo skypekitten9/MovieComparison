@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,20 +57,20 @@ public class Fragment_Imdb extends Fragment {
 
     private void InitializeImdb(View view) {
         omdbapi= new OMDBAPI(mainActivity);
+
         recyclerView = view.findViewById(R.id.rwImdb);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         Rw_AdapterOMDB adapter = new Rw_AdapterOMDB(R.layout.rw_row); //LÄGG TILL VAD SOM SKALL IN
         recyclerView.setAdapter(adapter);
-//        controller.GetSearchResult().observe(this,
-//                omdbResponses -> {
-//            adapter.SetResult(omdbResponses);
+        adapter.setController(controller);
+//        controller.GetSearchResult().observe(this, new Observer<List<OMDBResponse>>() {
+//            @Override
+//            public void onChanged(List<OMDBResponse> omdbResponses) {
+//                adapter.SetResult(omdbResponses);
+//            }
 //        });
-        controller.GetSearchResult().observe(this, new Observer<List<OMDBResponse>>() {
-            @Override
-            public void onChanged(List<OMDBResponse> omdbResponses) {
-                adapter.SetResult(omdbResponses);
-            }
-        });
+
         tvSearch = view.findViewById(R.id.tvSearch);
         //Search button functions
         btnSearch = view.findViewById(R.id.btnSearch);
@@ -78,9 +79,17 @@ public class Fragment_Imdb extends Fragment {
             public void onClick(View v) {
                 //startActivity(new Intent(mainActivity, PopUpWindow.class ));
                 omdbapi.SearchShows(tvSearch.getText().toString());
+                boolean temp = true;
 
+                while(temp) {
+                    if (omdbapi.getDone()) {
+                        temp = false;
+                        Log.d("resultat", String.valueOf(omdbapi.result2.size()));
+                        adapter.SetResult(controller.GetSearchResult2());
+                    }
+                }
             }
         });
-
     }
 }
+

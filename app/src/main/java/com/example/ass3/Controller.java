@@ -97,6 +97,7 @@ public class Controller {
         return movieRepository.GetAllMovies();
     }
     public LiveData<List<OMDBResponse>> GetSearchResult() { return imdbFragment.omdbapi.getResult();}
+    public List<OMDBResponse> GetSearchResult2() { return imdbFragment.omdbapi.getResult2();}
 
     public void RemoveMovie(int id)
     {

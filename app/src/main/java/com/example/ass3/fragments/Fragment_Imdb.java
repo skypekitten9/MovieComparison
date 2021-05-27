@@ -24,6 +24,7 @@ import com.example.ass3.OMDBResponse;
 import com.example.ass3.PopUpWindow;
 import com.example.ass3.R;
 import com.example.ass3.Rw_Adapter;
+import com.example.ass3.Rw_AdapterOMDB;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class Fragment_Imdb extends Fragment {
     Controller controller;
     public OMDBAPI omdbapi;
     TextView tvSearch;
+    Fragment_Imdb thisFragement = this;
 
 
     @Override
@@ -56,11 +58,18 @@ public class Fragment_Imdb extends Fragment {
         omdbapi= new OMDBAPI(mainActivity);
         recyclerView = view.findViewById(R.id.rwImdb);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Rw_Adapter adapter = new Rw_Adapter(R.layout.rw_row); //LÄGG TILL VAD SOM SKALL IN
+        Rw_AdapterOMDB adapter = new Rw_AdapterOMDB(R.layout.rw_row); //LÄGG TILL VAD SOM SKALL IN
         recyclerView.setAdapter(adapter);
-//        controller.GetSearchResult().observe(this, omdbResponses -> {
-//
+//        controller.GetSearchResult().observe(this,
+//                omdbResponses -> {
+//            adapter.SetResult(omdbResponses);
 //        });
+        controller.GetSearchResult().observe(this, new Observer<List<OMDBResponse>>() {
+            @Override
+            public void onChanged(List<OMDBResponse> omdbResponses) {
+                adapter.SetResult(omdbResponses);
+            }
+        });
         tvSearch = view.findViewById(R.id.tvSearch);
         //Search button functions
         btnSearch = view.findViewById(R.id.btnSearch);
@@ -69,6 +78,7 @@ public class Fragment_Imdb extends Fragment {
             public void onClick(View v) {
                 //startActivity(new Intent(mainActivity, PopUpWindow.class ));
                 omdbapi.SearchShows(tvSearch.getText().toString());
+
             }
         });
 

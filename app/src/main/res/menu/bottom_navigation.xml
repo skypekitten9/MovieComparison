@@ -11,10 +11,6 @@
         android:icon="@drawable/ic_baseline_filter_1_24"
         android:title="imdb"/>
     <item
-        android:id="@+id/nav_rotten"
-        android:icon="@drawable/ic_baseline_filter_2_24"
-        android:title="rotten"/>
-    <item
         android:id="@+id/nav_fav"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="favourite"/>

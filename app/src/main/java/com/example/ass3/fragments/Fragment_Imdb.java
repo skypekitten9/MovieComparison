@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ass3.Chuck;
 import com.example.ass3.Controller;
 import com.example.ass3.MainActivity;
 import com.example.ass3.OMDBAPI;
@@ -82,11 +83,11 @@ public class Fragment_Imdb extends Fragment {
             }
         });
         //btn effect
-        controller.buttonEffect(btnSearch);
 
         tvSearch = view.findViewById(R.id.tvSearch);
         //Search button functions
         btnSearch = view.findViewById(R.id.btnSearch);
+        controller.buttonEffect(btnSearch);
         btnSearch.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +102,8 @@ public class Fragment_Imdb extends Fragment {
                         adapter.SetResult(controller.GetSearchResult2());
                     }
                 }
+                Chuck c = new Chuck(controller);
+                c.StartConnect();
             }
         });
     }

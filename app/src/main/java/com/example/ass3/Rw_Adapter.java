@@ -1,18 +1,15 @@
 package com.example.ass3;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ass3.database.Movie;
-import com.example.ass3.fragments.Fragment_Rotten;
 
 import java.util.List;
 

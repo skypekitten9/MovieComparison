@@ -58,10 +58,5 @@ public class PopUpWindow extends Activity {
                 finish();
             }
         });
-
-
-
-
     }
-
 }

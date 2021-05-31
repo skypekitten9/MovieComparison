@@ -1,11 +1,7 @@
 package com.example.ass3;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.os.CountDownTimer;
-import android.os.Looper;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,7 +18,6 @@ import com.example.ass3.database.MovieRepository;
 import com.example.ass3.fragments.Fragment_Favourites;
 import com.example.ass3.fragments.Fragment_Home;
 import com.example.ass3.fragments.Fragment_Imdb;
-import com.example.ass3.fragments.Fragment_Rotten;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -32,7 +27,6 @@ public class Controller {
     Fragment_Home homeFragment;
     Fragment_Favourites favouritesFragment;
     Fragment_Imdb imdbFragment;
-    Fragment_Rotten rottenFragment;
 
     BottomNavigationView bottomNavigationView;
 
@@ -41,9 +35,6 @@ public class Controller {
     MovieRepository movieRepository;
 
     Movie tempMovie;
-
-
-
 
     public Controller(MainActivity mainActivity, BottomNavigationView bottomNav){
         this.main = mainActivity;
@@ -55,8 +46,6 @@ public class Controller {
         imdbFragment = new Fragment_Imdb();
         imdbFragment.SetCont(this);
         imdbFragment.SetMain(mainActivity);
-        rottenFragment = new Fragment_Rotten();
-        rottenFragment.setController(this);
         //BottomNavigation
         bottomNavigationView = bottomNav;
         bottomNavigationView.setOnNavigationItemSelectedListener(navListner);
@@ -81,9 +70,6 @@ public class Controller {
                     break;
                 case R.id.nav_imdb:
                     selectedFragment = imdbFragment;
-                    break;
-                case R.id.nav_rotten:
-                    selectedFragment = rottenFragment;
                     break;
                 case R.id.nav_fav:
                     selectedFragment = favouritesFragment;

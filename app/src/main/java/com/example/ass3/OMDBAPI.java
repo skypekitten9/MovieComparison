@@ -56,6 +56,8 @@ public class OMDBAPI extends Service {
 
     public void SearchShows(String searchTerm)
     {
+        done = false;
+        result2 = new ArrayList<OMDBResponse>();
         thread = new Thread(new SearchShows(searchTerm));
         thread.start();
     }
@@ -72,7 +74,7 @@ public class OMDBAPI extends Service {
         @Override
         public void run() {
             try {
-                result = searchShows(title, apiKey);
+                searchShows(title, apiKey);
                 Log.d(TAG, "Shows");
 
             } catch (IOException e) {
@@ -107,7 +109,7 @@ public class OMDBAPI extends Service {
             return data;
         }
 
-        public LiveData<List<OMDBResponse>> searchShows(String searchTerm, String apiKey) throws IOException {
+        public void searchShows(String searchTerm, String apiKey) throws IOException {
             String url = "https://www.omdbapi.com/?s=" + searchTerm + "&apikey=" + apiKey;
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             BufferedReader r = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -119,7 +121,12 @@ public class OMDBAPI extends Service {
             {
                 sb = sb + line;
             }
-            if(sb == null) return new MutableLiveData<>();
+            if(sb == null || sb.equals("{\"Response\":\"False\",\"Error\":\"Movie not found!\"}"))
+            {
+                result2 = new ArrayList<OMDBResponse>();
+                done = true;
+                return;
+            }
 
             String[] filterStart = sb.split("\\[");
             String[] filterEnd = filterStart[1].split("\\]");
@@ -160,7 +167,6 @@ public class OMDBAPI extends Service {
 
             MutableLiveData<List<OMDBResponse>> data = new MutableLiveData<List<OMDBResponse>>();
             data.postValue(result);
-            return data;
         }
     }
 }

@@ -39,7 +39,6 @@ public class Fragment_Imdb extends Fragment {
     Controller controller;
     public OMDBAPI omdbapi;
     TextView tvSearch;
-    Fragment_Imdb thisFragement = this;
 
 
     @Override
@@ -82,6 +81,7 @@ public class Fragment_Imdb extends Fragment {
         //btn effect
 
         tvSearch = view.findViewById(R.id.tvSearch);
+        
         //Search button functions
         btnSearch = view.findViewById(R.id.btnChuck);
         controller.buttonEffect(btnSearch);
@@ -126,5 +126,11 @@ public class Fragment_Imdb extends Fragment {
                 break;
 
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        tvSearch.setText("");
     }
 }

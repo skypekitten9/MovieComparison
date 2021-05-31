@@ -56,8 +56,10 @@ public class OMDBAPI extends Service {
 
     public void SearchShows(String searchTerm)
     {
-        thread = new Thread(new SearchShows(searchTerm));
-        thread.start();
+        if(!searchTerm.isEmpty()) {
+            thread = new Thread(new SearchShows(searchTerm));
+            thread.start();
+        }
     }
 
     private class SearchShows implements Runnable

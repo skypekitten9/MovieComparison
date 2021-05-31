@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ass3.Chuck;
 import com.example.ass3.Controller;
@@ -89,17 +90,25 @@ public class Fragment_Imdb extends Fragment {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(mainActivity, PopUpWindow.class ));
-                omdbapi.SearchShows(tvSearch.getText().toString());
-                boolean temp = true;
-                controller.mediaPlayer.start();
+                String searchphrase = tvSearch.getText().toString();
+                if(!searchphrase.isEmpty())
+                {
+                    omdbapi.SearchShows(tvSearch.getText().toString());
+                    boolean temp = true;
+                    controller.mediaPlayer.start();
 
-                while(temp) {
-                    if (omdbapi.getDone()) {
-                        temp = false;
-                        Log.d("resultat", String.valueOf(omdbapi.result2.size()));
-                        adapter.SetResult(controller.GetSearchResult2());
+                    while(temp) {
+                        if (omdbapi.getDone()) {
+                            temp = false;
+                            Log.d("resultat", String.valueOf(omdbapi.result2.size()));
+                            adapter.SetResult(controller.GetSearchResult2());
+                        }
                     }
                 }
+                else {
+                    Toast.makeText(getContext(), "You need to enter some text", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

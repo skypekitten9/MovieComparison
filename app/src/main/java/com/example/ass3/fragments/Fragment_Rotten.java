@@ -66,7 +66,7 @@ public class Fragment_Rotten extends Fragment {
             public void onClick(View v) {
                 //startActivity(new Intent(mainActivity, PopUpWindow.class ));
 
-                controller.InsertMovie("Test",2002,1.5f,"aibsdbasdh");
+                controller.InsertMovie("Test","2002","1.5","aibsdbasdh");
                 Chuck c = new Chuck(controller);
                 c.StartConnect();
 
@@ -76,10 +76,10 @@ public class Fragment_Rotten extends Fragment {
 
     }
 
-    public void InsertMovie(float rating)
+    public void InsertMovie(String rating)
     {
         String title = "Hej";
-        int year = 1990;
+        String year = "1990";
         String imdbid = "123uh12bn4i1bn4";
         controller.InsertMovie(title,year,rating,imdbid);
 
@@ -88,21 +88,21 @@ public class Fragment_Rotten extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        float value = -1f;
+        String value = "-1";
         Log.d(TAG, "Resultcode = " + Integer.toString(requestCode));
         switch (resultCode)
         {
             case (Activity.RESULT_OK):
 //                Log.d(TAG, "Resultcode = " + Integer.toString(resultCode));
 
-                value= data.getFloatExtra("rating", -1);
+                value = data.getStringExtra("rating");
 //                Log.d(TAG, "onActivityResult: returned " + Float.toString(value) );
 
                 Movie temp = controller.getTempMovie();
 
                 String title = temp.getTitle();
-                int year = temp.getYear();
-                float rating =value;
+                String year = temp.getYear();
+                String rating = value;
                 String imdbid = temp.getImdbId();
                 controller.InsertMovie(title,year,rating,imdbid);
                 break;

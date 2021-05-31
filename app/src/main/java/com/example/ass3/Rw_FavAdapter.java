@@ -44,8 +44,8 @@ public class Rw_FavAdapter extends RecyclerView.Adapter<Rw_FavAdapter.CustomView
     public void onBindViewHolder(@NonNull Rw_FavAdapter.CustomViewHolder holder, int position) {
 
         holder.twTitle.setText(movies.get(position).getTitle());
-        holder.twYear.setText(Integer.toString(movies.get(position).getYear()));
-        holder.twRating.setText(Float.toString(movies.get(position).getRating()));
+        holder.twYear.setText(movies.get(position).getYear());
+        holder.twRating.setText(movies.get(position).getRating());
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

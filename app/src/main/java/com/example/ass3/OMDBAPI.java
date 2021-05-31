@@ -31,15 +31,21 @@ public class OMDBAPI extends Service {
     public static final String baseurl = "http://www.omdbapi.com/";
     private static final String TAG = "OMDBAPI";
     public LiveData<List<OMDBResponse>> result = new MutableLiveData<>();
+    public List<OMDBResponse> result2 = new ArrayList<OMDBResponse>();
+    private boolean done = false;
 
     public LiveData<List<OMDBResponse>> getResult() {
         return result;
     }
+    public List<OMDBResponse> getResult2(){
+        return result2;
+    }
+    public boolean getDone() {
+        return done;
+    }
 
     public OMDBAPI(MainActivity main) {
         apiKey = main.getResources().getString(R.string.apiKey);
-
-
     }
 
     @Nullable
@@ -52,8 +58,6 @@ public class OMDBAPI extends Service {
     {
         thread = new Thread(new SearchShows(searchTerm));
         thread.start();
-
-
     }
 
     private class SearchShows implements Runnable
@@ -68,9 +72,8 @@ public class OMDBAPI extends Service {
 
         @Override
         public void run() {
-            HttpURLConnection conn = null;
             try {
-                result = searchShowsStub(title, apiKey);
+                result = searchShows(title, apiKey);
                 Log.d(TAG, "Shows");
 
             } catch (IOException e) {
@@ -98,6 +101,7 @@ public class OMDBAPI extends Service {
                 t.setImdbRating("8.5");
                 t.setYear("2006");
                 result.add(t);
+                result2.add(t);
             }
             MutableLiveData<List<OMDBResponse>> data = new MutableLiveData<List<OMDBResponse>>();
             data.postValue(result);
@@ -109,6 +113,7 @@ public class OMDBAPI extends Service {
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             BufferedReader r = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String sb = "";
+            String stream2;
 
             String line;
             while((line = r.readLine()) != null)
@@ -128,15 +133,35 @@ public class OMDBAPI extends Service {
                 //{"Title":"Batman: The Animated Series","Year":"1992–1995","Rated":"TV-PG","Released":"05 Sep 1992","Runtime":"23 min","Genre":"Animation, Action, Adventure, Family, Sci-Fi","Director":"N/A","Writer":"Bob Kane, Eric Radomski, Bruce Timm, Paul Dini, Bill Finger","Actors":"Kevin Conroy, Efrem Zimbalist Jr., Bob Hastings","Plot":"The Dark Knight battles crime in Gotham City with occasional help from Robin and Batgirl.","Language":"English","Country":"USA","Awards":"Won 1 Primetime Emmy. Another 4 wins & 19 nominations.","Poster":"https://m.media-amazon.com/images/M/MV5BOTM3MTRkZjQtYjBkMy00YWE1LTkxOTQtNDQyNGY0YjYzNzAzXkEyXkFqcGdeQXVyOTgwMzk1MTA@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"9.0/10"}],"Metascore":"N/A","imdbRating":"9.0","imdbVotes":"89,153","imdbID":"tt0103359","Type":"series","totalSeasons":"4","Response":"True"}
                 if(i > 0) shows[i] = shows[i].substring(1);
                 shows[i] = shows[i] + "}";
-                String stream = shows[i].toString();
+                String stream = shows[i];
                 OMDBResponse t = new Gson().fromJson(stream,OMDBResponse.class);
+                String id = t.getImdbID();
+                String url2 = "https://www.omdbapi.com/?i=" + id + "&apikey=" + apiKey;
+                HttpURLConnection conn2 = (HttpURLConnection) new URL(url2).openConnection();
+                BufferedReader r2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+                StringBuilder sb2 = new StringBuilder();
+
+                String line2;
+                while((line2 = r2.readLine()) != null)
+                {
+                    sb2.append(line2);
+                }
+
+                stream2 = sb2.toString();
+
+                OMDBResponse t1 = new Gson().fromJson(stream2,OMDBResponse.class);
+
+                t.setImdbRating(t1.getImdbRating());
+
                 result.add(t);
+                result2.add(t);
             }
+
+            done = true;
 
             MutableLiveData<List<OMDBResponse>> data = new MutableLiveData<List<OMDBResponse>>();
             data.postValue(result);
             return data;
-
         }
     }
 }

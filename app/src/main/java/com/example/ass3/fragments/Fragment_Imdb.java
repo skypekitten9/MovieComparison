@@ -5,11 +5,13 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +27,7 @@ import com.example.ass3.PopUpWindow;
 import com.example.ass3.R;
 import com.example.ass3.Rw_Adapter;
 import com.example.ass3.Rw_AdapterOMDB;
+import com.example.ass3.database.Movie;
 
 import java.util.List;
 
@@ -58,14 +61,20 @@ public class Fragment_Imdb extends Fragment {
 
     private void InitializeImdb(View view) {
         omdbapi= new OMDBAPI(mainActivity);
+
         recyclerView = view.findViewById(R.id.rwImdb);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         Rw_AdapterOMDB adapter = new Rw_AdapterOMDB(R.layout.rw_row); //LÄGG TILL VAD SOM SKALL IN
         recyclerView.setAdapter(adapter);
-//        controller.GetSearchResult().observe(this,
-//                omdbResponses -> {
-//            adapter.SetResult(omdbResponses);
+        adapter.setController(controller);
+//        controller.GetSearchResult().observe(this, new Observer<List<OMDBResponse>>() {
+//            @Override
+//            public void onChanged(List<OMDBResponse> omdbResponses) {
+//                adapter.SetResult(omdbResponses);
+//            }
 //        });
+
         controller.GetSearchResult().observe(this, new Observer<List<OMDBResponse>>() {
             @Override
             public void onChanged(List<OMDBResponse> omdbResponses) {
@@ -74,6 +83,7 @@ public class Fragment_Imdb extends Fragment {
         });
         //btn effect
         controller.buttonEffect(btnSearch);
+
         tvSearch = view.findViewById(R.id.tvSearch);
         //Search button functions
         btnSearch = view.findViewById(R.id.btnSearch);
@@ -82,9 +92,40 @@ public class Fragment_Imdb extends Fragment {
             public void onClick(View v) {
                 //startActivity(new Intent(mainActivity, PopUpWindow.class ));
                 omdbapi.SearchShows(tvSearch.getText().toString());
+                boolean temp = true;
 
+                while(temp) {
+                    if (omdbapi.getDone()) {
+                        temp = false;
+                        Log.d("resultat", String.valueOf(omdbapi.result2.size()));
+                        adapter.SetResult(controller.GetSearchResult2());
+                    }
+                }
             }
         });
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String value = "-1";
+        Log.d("TAG", "Resultcode = " + requestCode);
+        switch (resultCode)
+        {
+            case (Activity.RESULT_OK):
+//                Log.d(TAG, "Resultcode = " + Integer.toString(resultCode));
 
+                value = data.getStringExtra("rating");
+//                Log.d(TAG, "onActivityResult: returned " + Float.toString(value) );
+
+                Movie temp = controller.getTempMovie();
+
+                String title = temp.getTitle();
+                String year = temp.getYear();
+                String rating = value;
+                String imdbid = temp.getImdbId();
+                controller.InsertMovie(title,year,rating,imdbid);
+                break;
+
+        }
     }
 }

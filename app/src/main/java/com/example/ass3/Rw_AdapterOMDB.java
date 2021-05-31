@@ -58,9 +58,8 @@ public class Rw_AdapterOMDB extends RecyclerView.Adapter<Rw_AdapterOMDB.CustomVi
             public void onClick(View v) {
                 controller.OpenPopup();
 
-
                 String title = result.get(position).getTitle();
-                int year = Integer.valueOf(result.get(position).getYear());
+                String year = result.get(position).getYear();
                 String imdbid = result.get(position).getImdbID();
                 controller.MovieToAdd(title,year,imdbid);
 

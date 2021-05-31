@@ -2,6 +2,7 @@ package com.example.ass3;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.media.MediaPlayer;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,12 +34,16 @@ public class Controller {
     FragmentManager fragmentManager;
 
     MovieRepository movieRepository;
+    public MediaPlayer mediaPlayer;
 
     Movie tempMovie;
+
+
 
     public Controller(MainActivity mainActivity, BottomNavigationView bottomNav){
         this.main = mainActivity;
 
+        mediaPlayer = MediaPlayer.create(main,R.raw.blub2);
         //Fragments
         homeFragment = new Fragment_Home();
         favouritesFragment = new Fragment_Favourites();

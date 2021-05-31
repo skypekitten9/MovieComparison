@@ -94,6 +94,7 @@ public class Fragment_Imdb extends Fragment {
                 //startActivity(new Intent(mainActivity, PopUpWindow.class ));
                 omdbapi.SearchShows(tvSearch.getText().toString());
                 boolean temp = true;
+                controller.mediaPlayer.start();
 
                 while(temp) {
                     if (omdbapi.getDone()) {

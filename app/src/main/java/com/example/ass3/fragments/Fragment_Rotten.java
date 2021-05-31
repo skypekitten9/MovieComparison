@@ -2,6 +2,8 @@ package com.example.ass3.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,12 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.RatingBar;
 
 import com.example.ass3.Chuck;
 import com.example.ass3.Controller;
@@ -56,6 +57,10 @@ public class Fragment_Rotten extends Fragment {
         controller.GetMovies().observe(this, movies -> adapter.SetMovies(movies));
         btn = view.findViewById(R.id.refreshbtn);
         popupWindow = new PopupWindow();
+
+        controller.buttonEffect(btn);
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +72,7 @@ public class Fragment_Rotten extends Fragment {
 
             }
         });
+
 
     }
 
@@ -103,4 +109,5 @@ public class Fragment_Rotten extends Fragment {
 
         }
     }
+
 }

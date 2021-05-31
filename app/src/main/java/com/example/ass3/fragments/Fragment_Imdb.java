@@ -49,6 +49,8 @@ public class Fragment_Imdb extends Fragment {
         InitializeImdb(view);
 
 
+
+
         return view;
     }
     public void SetMain(MainActivity main){ this.mainActivity = main; }
@@ -70,6 +72,8 @@ public class Fragment_Imdb extends Fragment {
                 adapter.SetResult(omdbResponses);
             }
         });
+        //btn effect
+        controller.buttonEffect(btnSearch);
         tvSearch = view.findViewById(R.id.tvSearch);
         //Search button functions
         btnSearch = view.findViewById(R.id.btnSearch);

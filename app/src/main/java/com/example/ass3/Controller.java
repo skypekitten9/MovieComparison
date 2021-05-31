@@ -2,8 +2,11 @@ package com.example.ass3;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Looper;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -126,6 +129,28 @@ public class Controller {
         main.runOnUiThread(new Toasters(main,resp));
     }
 
+    /*Button Click Effect*/
+    public static void buttonEffect(View button){
+        button.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
 
 
 }
@@ -145,3 +170,4 @@ class Toasters implements Runnable
         Toast.makeText(main,resp.getValue().getJoke(),Toast.LENGTH_LONG).show();
     }
 }
+

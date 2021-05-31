@@ -12,8 +12,7 @@
         android:theme="@style/Theme.Ass3"
         android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity" android:configChanges="orientation|keyboardHidden|screenSize">
-
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

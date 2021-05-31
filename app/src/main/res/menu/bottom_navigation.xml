@@ -5,13 +5,13 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="home"/>
+        android:title="Chuck"/>
     <item
         android:id="@+id/nav_imdb"
         android:icon="@drawable/ic_baseline_filter_1_24"
-        android:title="imdb"/>
+        android:title="Media"/>
     <item
         android:id="@+id/nav_fav"
         android:icon="@drawable/ic_baseline_favorite_24"
-        android:title="favourite"/>
+        android:title="Favourites"/>
 </menu>

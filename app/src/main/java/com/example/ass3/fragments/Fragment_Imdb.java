@@ -1,7 +1,6 @@
 package com.example.ass3.fragments;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -24,9 +23,7 @@ import com.example.ass3.Controller;
 import com.example.ass3.MainActivity;
 import com.example.ass3.OMDBAPI;
 import com.example.ass3.OMDBResponse;
-import com.example.ass3.PopUpWindow;
 import com.example.ass3.R;
-import com.example.ass3.Rw_Adapter;
 import com.example.ass3.Rw_AdapterOMDB;
 import com.example.ass3.database.Movie;
 
@@ -86,7 +83,7 @@ public class Fragment_Imdb extends Fragment {
 
         tvSearch = view.findViewById(R.id.tvSearch);
         //Search button functions
-        btnSearch = view.findViewById(R.id.btnSearch);
+        btnSearch = view.findViewById(R.id.btnChuck);
         controller.buttonEffect(btnSearch);
         btnSearch.setOnClickListener(new OnClickListener() {
             @Override
@@ -102,8 +99,6 @@ public class Fragment_Imdb extends Fragment {
                         adapter.SetResult(controller.GetSearchResult2());
                     }
                 }
-                Chuck c = new Chuck(controller);
-                c.StartConnect();
             }
         });
     }

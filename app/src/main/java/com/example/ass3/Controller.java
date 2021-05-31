@@ -41,6 +41,7 @@ public class Controller {
 
         //Fragments
         homeFragment = new Fragment_Home();
+        homeFragment.SetController(this);
         favouritesFragment = new Fragment_Favourites();
         favouritesFragment.setController(this);
         imdbFragment = new Fragment_Imdb();

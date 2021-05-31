@@ -62,7 +62,6 @@ public class OMDBAPI extends Service {
 
     private class SearchShows implements Runnable
     {
-        String search= "?s=";
         LiveData<List<OMDBResponse>> data;
         String title;
 

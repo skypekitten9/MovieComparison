@@ -5,7 +5,7 @@
     //HomeFragment
     <string name="headerHome">MovieMixer</string>
     <string name="hntSearch">Enter movie title</string>
-    <string name="btnSearch">Search</string>
+    <string name="btnChuck">Get a Chuckle</string>
     <string name="logo_ass3">Moviemixlogo</string>
     //RottenFragment
     <string name="headerRotten">Rotten</string>
@@ -15,4 +15,5 @@
     <string name="btnRefresh2">Refresh</string>
     //OMDB
     <string name="apiKey">1a8005f4</string>
+    <string name="btnSearch">Search</string>
 </resources>

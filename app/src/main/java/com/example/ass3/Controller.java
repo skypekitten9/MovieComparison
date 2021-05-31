@@ -3,6 +3,7 @@ package com.example.ass3;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,11 +40,11 @@ public class Controller {
     Movie tempMovie;
 
 
-
     public Controller(MainActivity mainActivity, BottomNavigationView bottomNav){
         this.main = mainActivity;
 
         mediaPlayer = MediaPlayer.create(main,R.raw.blub2);
+        mediaPlayer.setVolume(1f,1f);
         //Fragments
         homeFragment = new Fragment_Home();
         homeFragment.SetController(this);

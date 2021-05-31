@@ -81,7 +81,7 @@ public class Fragment_Imdb extends Fragment {
         //btn effect
 
         tvSearch = view.findViewById(R.id.tvSearch);
-        
+
         //Search button functions
         btnSearch = view.findViewById(R.id.btnChuck);
         controller.buttonEffect(btnSearch);

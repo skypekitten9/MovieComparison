@@ -45,7 +45,7 @@ public class Rw_FavAdapter extends RecyclerView.Adapter<Rw_FavAdapter.CustomView
 
         holder.twTitle.setText(movies.get(position).getTitle());
         holder.twYear.setText(movies.get(position).getYear());
-        holder.twRating.setText(movies.get(position).getRating());
+        holder.twRating.setText(movies.get(position).getRating()+ "⭐");
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

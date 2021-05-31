@@ -52,7 +52,7 @@ public class Rw_AdapterOMDB extends RecyclerView.Adapter<Rw_AdapterOMDB.CustomVi
 
         holder.twTitle.setText(result.get(position).getTitle());
         holder.twYear.setText(result.get(position).getYear());
-        holder.twRating.setText((result.get(position).getImdbRating()));
+        holder.twRating.setText((result.get(position).getImdbRating()+"⭐"));
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
